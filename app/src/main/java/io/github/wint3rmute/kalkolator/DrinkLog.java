@@ -44,7 +44,8 @@ public class DrinkLog extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getApplicationContext(), data_upload.class);
+                startActivity(intent);
             }
         });
     }
