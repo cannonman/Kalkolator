@@ -8,17 +8,17 @@ import java.util.Date;
 
 public class DrinkLogObject {
 
-    private Date date;
+    private String date;
     private float liters;
     private float percentage;
 
-    public DrinkLogObject(Date date, float liters, float percentage) {
+    public DrinkLogObject(String date, float liters, float percentage) {
         this.date = date;
         this.liters = liters;
         this.percentage = percentage;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

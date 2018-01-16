@@ -74,10 +74,10 @@ public class DrinkLog extends AppCompatActivity {
 
     void getSampleShit()
     {
-        DrinkLogObject a = new DrinkLogObject(new Date(), 12, 34);
-        DrinkLogObject b = new DrinkLogObject(new Date(), 12, 34);
-        DrinkLogObject c = new DrinkLogObject(new Date(), 12, 34);
-        DrinkLogObject d = new DrinkLogObject(new Date(), 12, 34);
+        DrinkLogObject a = new DrinkLogObject(new Date().toString(), 12, 34);
+        DrinkLogObject b = new DrinkLogObject(new Date().toString(), 12, 34);
+        DrinkLogObject c = new DrinkLogObject(new Date().toString(), 12, 34);
+        DrinkLogObject d = new DrinkLogObject(new Date().toString(), 12, 34);
 
         drinkLog.add(a);
         drinkLog.add(b);
