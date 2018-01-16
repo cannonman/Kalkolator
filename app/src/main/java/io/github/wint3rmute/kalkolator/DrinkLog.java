@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -23,12 +25,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class DrinkLog extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
+    private List<DrinkLogObject> drinkLog = new ArrayList<>();
+    private RecyclerView drinkLogRecyclerView;
+    private DrinkLogObjectAdapter drinkLogAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,36 @@ public class DrinkLog extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        testRecyclerView();
+    }
+
+    void testRecyclerView()
+    {
+        drinkLogRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        drinkLogAdapter = new DrinkLogObjectAdapter(drinkLog);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        drinkLogRecyclerView .setLayoutManager(mLayoutManager);
+        drinkLogRecyclerView .setItemAnimator(new DefaultItemAnimator());
+        drinkLogRecyclerView .setAdapter(drinkLogAdapter);
+
+        getSampleShit();
+    }
+
+    void getSampleShit()
+    {
+        DrinkLogObject a = new DrinkLogObject(new Date(), 12, 34);
+        DrinkLogObject b = new DrinkLogObject(new Date(), 12, 34);
+        DrinkLogObject c = new DrinkLogObject(new Date(), 12, 34);
+        DrinkLogObject d = new DrinkLogObject(new Date(), 12, 34);
+
+        drinkLog.add(a);
+        drinkLog.add(b);
+        drinkLog.add(c);
+        drinkLog.add(d);
+
+        drinkLogAdapter.notifyDataSetChanged();
     }
 
     void firebaseLogin() {
@@ -82,8 +119,8 @@ public class DrinkLog extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                alert(user.getEmail());
-                getDataBase();
+                alert(user.getUid());
+                //getDataBase();
             } else {
                 alert("Something went wrong. Go kill yourself");
             }
